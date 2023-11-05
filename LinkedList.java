@@ -10,6 +10,7 @@ public class LinkedList{
         Node head;
         Node tail;
         static int size=0;
+        // To insert the first node in a list
        public void addFirst(int data){
         Node firstNode= new Node(data);
 
@@ -21,8 +22,9 @@ public class LinkedList{
             head= firstNode;
           }
           size++;
-          
-        }
+     }
+
+    //  To insert the last node in the list
         public void addLast(int data){
             Node lastNode= new Node(data);
             if(head==null){
@@ -34,7 +36,7 @@ public class LinkedList{
           }
           size++;
         }
-
+        // To print the list
         public void printList(){
             Node temp = head;
             while(temp!= null){
@@ -43,6 +45,8 @@ public class LinkedList{
             }
             System.out.print("null");
         }
+
+        // To remove the first node in the list
         public void removeFirst(){
             if(head==null){
                 System.out.print("list is empty");
@@ -56,6 +60,8 @@ public class LinkedList{
             }
             size--;
         }
+
+        // Removing the last node of the list
         public void removeLast(){
             if(head==null){
                 System.out.print("List is empty");
@@ -89,6 +95,8 @@ public class LinkedList{
             return -1;
         }
 
+        // Search using recursive method
+
         public int searchRecursion(int key, Node head){
             if(head == null){
                 return -1;
@@ -102,6 +110,41 @@ public class LinkedList{
             }
         }
 
+        // Reversing a linked list
+        public void reverseList(){
+            Node prev = null;
+            Node curr= tail= head;
+            Node next;
+            while(curr!=null){next= curr.next;
+            curr.next= prev;
+            prev= curr;
+            curr= next;}
+            
+        head = prev;
+        }
+
+        // Removing the Nth node from last
+        public void delNthNode(int n){
+            if(size==0){
+                System.out.println("List is empty");
+                return;
+            }
+            if(n==size){
+                this.removeFirst();
+                return;
+            }
+            if(n==0){
+                this.removeLast();
+                return;
+            }
+            Node temp = head;
+            for(int i=0; i<(size-n-1);i++ ){
+                temp= temp.next;
+            }
+            // removing the next given node
+              temp.next= temp.next.next;
+        }
+
 
     public static void main(String[] args){
         LinkedList ll = new LinkedList();
@@ -110,5 +153,10 @@ public class LinkedList{
         ll.addLast(3);
         ll.addLast(4);
         System.out.println("The index will be :"+ ll.searchRecursion(4, ll.head));
+
+        ll.reverseList();
+        ll.printList();
+        ll.delNthNode(3);
+        ll.printList();
     }
     }
