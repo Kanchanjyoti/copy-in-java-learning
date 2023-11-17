@@ -115,12 +115,14 @@ public class LinkedList{
             Node prev = null;
             Node curr= tail= head;
             Node next;
-            while(curr!=null){next= curr.next;
+            while(curr!=null){
+            next= curr.next;
             curr.next= prev;
             prev= curr;
-            curr= next;}
+            curr= next;
+            }
             
-        head = prev;
+            head = prev;
         }
 
         // Removing the Nth node from last
@@ -143,6 +145,57 @@ public class LinkedList{
             }
             // removing the next given node
               temp.next= temp.next.next;
+        }
+
+        // checking whether the list is pallindrome or not 
+        public Node midNode(Node head){
+            Node slow=head;
+            Node fast= head;
+            while(fast!=null && fast.next!= null){
+                fast= fast.next.next;
+                slow=slow.next;
+            }
+            return slow;
+        }
+        public boolean isPallindrome(){
+            if(head==null && head==tail){
+                return true;
+            }
+            Node midNode= midNode(Node head);
+
+            Node prev=null;
+            Node curr=midNode;
+            Node next;
+
+            while(curr!=null){
+            next= curr.next;
+            curr.next= prev;
+            prev= curr;
+            curr= next;
+            }
+        Node right= prev;
+        Node left= head;
+        while(right!= null){
+            if(left.data!= right.data){
+                return false;
+                left=left.next;
+                right=right.next;
+
+            }
+            return true;
+        }
+        }
+
+        // list has cycle or not
+        public static boolean isCycle(){
+          while(fast!= null && fast.next!=null){
+            fast=fast.next.next;
+            slow= slow.next;
+            if(fast==slow){
+                return true;
+            }
+          }
+          return false;
         }
 
 
