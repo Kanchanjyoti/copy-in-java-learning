@@ -76,6 +76,67 @@ public class StackK {
         System.out.print(arr[i]+ " ");
        }
     }
+
+    //    find valid bracket {} () [] 
+  public static boolean validBrackets(String str){
+   Stack<Character> s= new Stack<>();
+   for(int i=0; i<str.length(); i++){
+    char ch = str.charAt(i);
+   if(ch=='(' || ch =='{' || ch=='['){
+      s.push(ch);
+   }
+
+   else if(s.isEmpty()){
+        return false;
+    }
+   else{
+    if(ch=='}'&& s.peek()=='{'||
+       ch==')'&& s.peek()=='('||
+       ch==']'&& s.peek()=='['){
+       s.pop();
+    }
+   
+    else{
+        return false;
+    }
+   }
+  }
+  return true;
+}
+//  find the doublet brackets 
+  public static boolean doubleBracket(String str) {
+    Stack<Character> s= new Stack<>();
+     for(int i=0; i<str.length();i++){
+        int count= 0;
+        char ch= str.charAt(i);
+        if(ch==')'){
+           if(s.isEmpty()){
+            return true;
+           }
+           else{
+            while(!s.isEmpty() && s.peek() != '('){
+                s.pop();
+                count++;
+            }
+            if(s.isEmpty()){
+                return true;
+            }
+            else{
+                if(count< 1){
+                    return true;
+                }
+                else{
+                    s.pop();
+                }
+            }
+           }
+        }
+         else{
+           s.push(ch);
+        }
+     }
+    return false;
+  }
     public static void main(String[] args){
         Stack<Integer> stack= new Stack<>();
         stack.push(1);
@@ -102,5 +163,11 @@ public class StackK {
        nextGreater(arr, newarr);
        System.out.println();
        printarr(newarr);
+      // find valid brackets 
+       String str= "{({}{})}";
+       System.out.println(validBrackets(str));
+
+       String st= "((b)+((a)))";
+       System.out.println(doubleBracket(st));
     }
 }
