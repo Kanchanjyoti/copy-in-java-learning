@@ -1,6 +1,6 @@
 public class LinkedList1 {
    public static class Node {
-      static int data;
+       int data;
       Node next;
       public Node(int data) {
          this.data= data;
